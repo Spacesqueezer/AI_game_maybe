@@ -5,9 +5,23 @@ const MIN_RADIUS = 150.0
 const ORBIT_SPACING = 100.0
 
 var obstacle_scene = preload("res://scenes/obstacle.tscn")
+var coin_scene = preload("res://scenes/coin.tscn")
+
+var score = 0
+var spawn_timer = 0.0
+const SPAWN_INTERVAL = 2.0
+
+@onready var score_label = $CanvasLayer/ScoreLabel
 
 func _ready():
 	_spawn_obstacles()
+	_update_score_ui()
+
+func _process(delta):
+	spawn_timer += delta
+	if spawn_timer >= SPAWN_INTERVAL:
+		spawn_timer = 0.0
+		_spawn_coin()
 
 func _draw():
 	# Draw orbits
@@ -16,7 +30,6 @@ func _draw():
 		draw_arc(Vector2.ZERO, radius, 0, TAU, 64, Color(0, 1, 1, 0.2), 4.0, true)
 
 func _spawn_obstacles():
-	# Spawn a few obstacles on different orbits
 	for i in range(6):
 		var obs = obstacle_scene.instantiate()
 		var orbit_index = randi() % ORBIT_COUNT
@@ -25,3 +38,18 @@ func _spawn_obstacles():
 		var spd = randf_range(1.0, 2.5)
 		obs.setup(orbit_index, start_angle, dir, spd)
 		add_child(obs)
+
+func _spawn_coin():
+	var coin = coin_scene.instantiate()
+	var orbit_index = randi() % ORBIT_COUNT
+	var start_angle = randf() * TAU
+	coin.setup(orbit_index, start_angle)
+	add_child(coin)
+
+func add_score(amount: int):
+	score += amount
+	_update_score_ui()
+
+func _update_score_ui():
+	if score_label:
+		score_label.text = "Score: " + str(score)

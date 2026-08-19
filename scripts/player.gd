@@ -37,6 +37,11 @@ func _update_position():
 func _on_area_entered(area):
 	if area.is_in_group("obstacles"):
 		_die()
+	elif area.is_in_group("coins"):
+		var game = get_parent()
+		if game.has_method("add_score"):
+			game.add_score(1)
+		area.queue_free()
 
 func _die():
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
