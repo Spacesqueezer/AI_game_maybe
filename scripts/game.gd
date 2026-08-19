@@ -1,8 +1,8 @@
 extends Node2D
 
 const ORBIT_COUNT = 4
-const MIN_RADIUS = 150.0
-const ORBIT_SPACING = 100.0
+const MIN_RADIUS = 100.0
+const ORBIT_SPACING = 80.0
 
 var obstacle_scene = preload("res://scenes/obstacle.tscn")
 var coin_scene = preload("res://scenes/coin.tscn")

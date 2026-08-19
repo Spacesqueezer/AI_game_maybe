@@ -1,7 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://game_scene_id"]
+[gd_scene load_steps=3 format=3 uid="uid://game_scene_id"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://player_scene_id" path="res://scenes/player.tscn" id="2_player"]
+
+[sub_resource type="Environment" id="Environment_glow"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.5
+glow_strength = 1.2
+glow_bloom = 0.2
+glow_blend_mode = 0
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_script")
@@ -27,3 +35,8 @@ offset_bottom = 60.0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Score: 0"
+
+
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_glow")

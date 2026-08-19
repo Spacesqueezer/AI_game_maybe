@@ -14,3 +14,14 @@ shape = SubResource("CircleShape2D_player")
 [node name="Visual" type="Polygon2D" parent="."]
 color = Color(1, 0, 1, 1)
 polygon = PackedVector2Array(0, -15, 10, -10, 15, 0, 10, 10, 0, 15, -10, 10, -15, 0, -10, -10)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.5
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 6.0
+color = Color(1, 0, 1, 0.5)
