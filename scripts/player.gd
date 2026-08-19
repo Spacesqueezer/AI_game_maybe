@@ -11,6 +11,7 @@ var direction = 1 # 1 for clockwise, -1 for counter-clockwise
 
 func _ready():
 	_update_position()
+	area_entered.connect(_on_area_entered)
 
 func _process(delta):
 	angle += speed * direction * delta
@@ -32,3 +33,10 @@ func _jump():
 func _update_position():
 	var radius = MIN_RADIUS + current_orbit_index * ORBIT_SPACING
 	position = Vector2(cos(angle), sin(angle)) * radius
+
+func _on_area_entered(area):
+	if area.is_in_group("obstacles"):
+		_die()
+
+func _die():
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

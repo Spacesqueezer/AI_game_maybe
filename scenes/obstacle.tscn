@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://obstacle_scene_id"]
+
+[ext_resource type="Script" path="res://scripts/obstacle.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obs"]
+size = Vector2(20, 20)
+
+[node name="Obstacle" type="Area2D" groups=["obstacles"]]
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_obs")
+
+[node name="Visual" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(1, 0, 0, 1)
